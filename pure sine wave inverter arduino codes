@@ -1,0 +1,80 @@
+
+/*First code is written by Zafer Yıldız in 2019
+  Modified by Yusuf inan on 22.12.2021*/
+
+
+
+
+int termistor;              //It holds termistor resistance value to control temperature with arduino controlled fan.
+void setup(){
+pinMode(8, OUTPUT);        //Sine wave out1.
+pinMode(9, OUTPUT);        //Sine wave out2.
+pinMode(10,OUTPUT);        //Fan control pin to run fun while temperature too high for circuit elements.
+}
+void loop(){
+  termistor=analogRead(A0); // Temperature depended resistance value assigned to termistor value to control circuit temperature.
+  
+  
+  while(termistor>180){    //The termistor component is a ntc so, its value decreases while the temperature increase.
+                           //From experiment termistor value=180 is corresponding value 45°C temperature that could be harmful for circuit components.
+                           // It allows circuit to run while the temperature smaller than  45°C.
+                          
+                          // Pulse width modulation is used to create sine waves. 
+digitalWrite(8, HIGH);    //first high pulse 
+delayMicroseconds(500);   //makes pulse width 
+digitalWrite(8, LOW);     //first low pulse     
+delayMicroseconds(500);   //makes pulse width  
+digitalWrite(8, HIGH);    //second high pulse 
+delayMicroseconds(750);   //makes pulse width  
+digitalWrite(8, LOW);     //second low pulse
+delayMicroseconds(500);   //makes pulse width
+digitalWrite(8, HIGH);    //third high pulse 
+delayMicroseconds(1250);  //makes pulse width
+digitalWrite(8, LOW);     //third low pulse
+delayMicroseconds(500);   //makes pulse width
+digitalWrite(8, HIGH);    //fourth high pulse(wave peak)
+delayMicroseconds(2000);  //makes pulse width
+digitalWrite(8, LOW);     //fourth low pulse
+delayMicroseconds(500);   //makes pulse width
+digitalWrite(8, HIGH);    //fifth high pulse
+delayMicroseconds(1250);   //makes pulse width
+digitalWrite(8, LOW);     //fifth low pulse
+delayMicroseconds(500);   //makes pulse width
+digitalWrite(8, HIGH);    //sixth high pulse
+delayMicroseconds(750);    //makes pulse width
+digitalWrite(8, LOW);      //sixth low pulse
+delayMicroseconds(500);    //makes pulse width
+digitalWrite(8, HIGH);     //seventh high pulse
+delayMicroseconds(500);    //makes pulse width
+digitalWrite(8, LOW);      //seventh low pulse(wave bottom)
+//......
+digitalWrite(9, HIGH);
+delayMicroseconds(500);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(750);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(1250);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(2000);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(1250);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(750);
+digitalWrite(9, LOW);
+delayMicroseconds(500);
+digitalWrite(9, HIGH);
+delayMicroseconds(500);
+digitalWrite(9, LOW);
+}
+digitalWrite(10,HIGH);        //It runs the fan when the temperature is above 45°C. 
+}
